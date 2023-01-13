@@ -15,6 +15,14 @@ class CarODM extends AbstractODM<ICar> {
     });
     super(schema, 'car');
   }
+
+  public async getCars(): Promise<ICar[]> {
+    return this.model.find();
+  }
+
+  public async getCarById(id: string): Promise<ICar | null> {
+    return this.model.findById(id);
+  }
 }
 
 export default CarODM;

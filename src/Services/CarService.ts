@@ -15,6 +15,18 @@ class CarService {
     const newCar = await carODM.create({ ...data, status: data.status || false });
     return this.createCarDomain(newCar);
   }
+
+  public async getAllCars() {
+    const carODM = new CarODM();
+    const carsList = await carODM.getCars();
+    return carsList.map((car) => this.createCarDomain(car));
+  }
+
+  public async getCarById(id:string) {
+    const carODM = new CarODM();
+    const car = await carODM.getCarById(id);
+    return this.createCarDomain(car);
+  }
 }
 
 export default CarService;
