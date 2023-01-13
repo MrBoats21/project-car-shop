@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 import 'dotenv/config';
 
+// iniciando projeto 
+
 const MONGO_DB_URL = 'mongodb://localhost:27017/CarShop';
 
 const connectToDatabase = (
