@@ -31,7 +31,7 @@ class CarController {
 
   public async getCars() {
     try {
-      const carsList = await this.service.getAllCars();
+      const carsList = await this.service.getCars();
       return this.res.status(200).json(carsList);
     } catch (error) {
       this.next(error);
@@ -47,6 +47,20 @@ class CarController {
       }
       return this.res.status(200).json(car);
     } catch (error) {
+      return this.res.status(422).json({ message: 'Invalid mongo id' });
+    }
+  }
+
+  async updateCar() {    
+    try {
+      const { body, params: { id } } = this.req;
+      const refreshedCar = await this.service.updateCar(id, body);
+      if (refreshedCar) {
+        return this.res.status(200).json(refreshedCar);
+      }
+
+      return this.res.status(404).json({ message: 'Car not found' });
+    } catch (err) {
       return this.res.status(422).json({ message: 'Invalid mongo id' });
     }
   }
